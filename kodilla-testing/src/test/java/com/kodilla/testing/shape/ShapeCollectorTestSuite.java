@@ -4,13 +4,13 @@ import org.junit.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class ShapeCollectorTestSuite {
 
     private static int testCounter = 0;
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-
 
     @BeforeClass
     public static void beforeAllTests() {
@@ -26,13 +26,6 @@ public class ShapeCollectorTestSuite {
     public void beforeEveryTest() {
         testCounter++;
         System.out.println("Preparing to execute test #" + testCounter);
-        System.setOut(new PrintStream(outContent));
-
-    }
-
-    @After
-    public void restoreStreams() {
-        System.setOut(System.out);
     }
 
     @Test
@@ -84,7 +77,6 @@ public class ShapeCollectorTestSuite {
         Shape circle = new Circle(2);
         shapeCollector.addFigure(circle);
 
-
         //When
         Shape retrievedShape;
         retrievedShape = shapeCollector.getFigure(0);
@@ -94,22 +86,24 @@ public class ShapeCollectorTestSuite {
     }
 
 
-
     @Test
     public void testShowFigures() {
         //Given
         ShapeCollector shapeCollector = new ShapeCollector();
-        shapeCollector.addFigure(new Circle(2));
-        shapeCollector.addFigure(new Square(2));
-        shapeCollector.addFigure(new Triangle(3,2));
-        //When
-        shapeCollector.showFigures();
-        //Then
-        Assert.assertEquals(new Circle(2).toString()+ "\n"
-                + new Square(2).toString() + "\n"
-                + new Triangle(3,2).toString() + "\n"
-                , outContent.toString());
-    }
+        Shape circle = new Circle(2);
+        Shape square = new Square(2);
+        Shape triangle = new Triangle(2,3);
+        shapeCollector.addFigure(circle);
+        shapeCollector.addFigure(square);
+        shapeCollector.addFigure(triangle);
 
+        //When
+        ArrayList<Shape> retrievedShapes = shapeCollector.showFigures();
+        ArrayList<Shape> actualShapes = new ArrayList<>(Arrays.asList(circle,square,triangle));
+
+        //Then
+        Assert.assertEquals(actualShapes,retrievedShapes);
+
+    }
 
 }
