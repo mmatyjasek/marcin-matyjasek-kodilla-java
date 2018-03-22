@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class AdvStatistics {
     Statistics statistics;
     private int usersNumber, postsNumber, commentsNumber;
-    private double avgNoOfPostsPerUser, avgNoOfCommentsPerUser, avgNoOgCommentsPerPost;
+    private Double avgNoOfPostsPerUser, avgNoOfCommentsPerUser, avgNoOfCommentsPerPost;
 
 
     public AdvStatistics(Statistics statistics) {
@@ -17,21 +17,12 @@ public class AdvStatistics {
         this.usersNumber = statistics.usersNames().size();
         this.postsNumber = statistics.postsCount();
         this.commentsNumber = statistics.commentsCount();
-        if (usersNumber>0) {
-            this.avgNoOfPostsPerUser = (double)postsNumber / usersNumber;
-            this.avgNoOfCommentsPerUser = (double)commentsNumber/usersNumber;
-        } else{
-            this.avgNoOfPostsPerUser = -1;
-            this.avgNoOfCommentsPerUser = -1;
-        }
 
-
-        if (postsNumber>0) {
-            this.avgNoOgCommentsPerPost = (double)commentsNumber / postsNumber;
-        } else{
-            this.avgNoOgCommentsPerPost = -1;
-        }
+        this.avgNoOfPostsPerUser = (double)postsNumber / usersNumber;
+        this.avgNoOfCommentsPerUser = (double)commentsNumber/usersNumber;
+        this.avgNoOfCommentsPerPost = (double)commentsNumber / postsNumber;
     }
+
 
     public HashMap<String, Double> showStatistics(){
         HashMap<String, Double> stats = new HashMap<>();
@@ -40,7 +31,7 @@ public class AdvStatistics {
         stats.put("Number of comments", (double)commentsNumber);
         stats.put("Avg number of posts per user", avgNoOfPostsPerUser);
         stats.put("Avg number of comments per user", avgNoOfCommentsPerUser);
-        stats.put("Avg number of comments per post", avgNoOgCommentsPerPost);
+        stats.put("Avg number of comments per post", avgNoOfCommentsPerPost);
 
         return stats;
     }
@@ -53,7 +44,7 @@ public class AdvStatistics {
         return avgNoOfCommentsPerUser;
     }
 
-    public double getAvgNoOgCommentsPerPost() {
-        return avgNoOgCommentsPerPost;
+    public double getAvgNoOfCommentsPerPost() {
+        return avgNoOfCommentsPerPost;
     }
 }

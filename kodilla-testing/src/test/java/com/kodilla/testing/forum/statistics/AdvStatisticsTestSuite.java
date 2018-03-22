@@ -1,7 +1,6 @@
 package com.kodilla.testing.forum.statistics;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,66 +11,172 @@ import static org.mockito.Mockito.when;
 
 public class AdvStatisticsTestSuite {
 
-    @Test
-    public void testCalculateAdvStatisticsWithMock() {
-        //Given scenario 1 : No of users =100, no of posts =0, no of comments =0
-        int i;
-        Statistics statisticsMock = mock(Statistics.class);
-        List<String> list100 = new ArrayList<>();
-        List<String> emptyList = new ArrayList<>();
-        for(i=0;i<100;i++){
-            list100.add("abc");
+    private List<String> generateListOfUsers(int noOfUsers) {
+        List<String> resultList = new ArrayList<>();
+        for(int n = 1; n <= noOfUsers; n++){
+
+            String user = "user" + n;
+            resultList.add(user);
         }
-        when(statisticsMock.usersNames()).thenReturn(list100);
+        return resultList;
+    }
+
+    private static int testCount =1;
+
+    @Before
+    public void before(){
+        System.out.println("Test Case" + testCount + ": begin");
+    }
+
+    @After
+    public void after(){
+        System.out.println("Test Case" + testCount + ": end");
+        testCount++;
+    }
+
+    @BeforeClass
+    public static void beforeClass(){
+        System.out.println("Test Suite: begin");
+    }
+
+    @AfterClass
+    public static void afterClass(){
+        System.out.println("Test Suite: end");
+    }
+
+    @Test
+    public void averageNumberOfPostsPerUserIsPositiveInfinityWhenZeroUsers() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        List<String> emptyList = new ArrayList<>();
+        when(statisticsMock.usersNames()).thenReturn(emptyList);
+        when(statisticsMock.postsCount()).thenReturn(1);
+        AdvStatistics advStatistics = new AdvStatistics(statisticsMock);
+        advStatistics.calculateAdvStatistics(statisticsMock);
+        //When
+        Double avNoOfPostsPerUser = advStatistics.getAvgNoOfPostsPerUser();
+        //Then
+        Assert.assertEquals(Double.POSITIVE_INFINITY, avNoOfPostsPerUser,0);
+    }
+
+    @Test
+    public void averageNumberOfCommentsPerUserIsPositiveInfinityWhenZeroUsers() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        List<String> emptyList = new ArrayList<>();
+        when(statisticsMock.usersNames()).thenReturn(emptyList);
+        when(statisticsMock.commentsCount()).thenReturn(1);
+        AdvStatistics advStatistics = new AdvStatistics(statisticsMock);
+        advStatistics.calculateAdvStatistics(statisticsMock);
+        //When
+        Double avNoOfCommentsPerUser = advStatistics.getAvgNoOfCommentsPerUser();
+        //Then
+        Assert.assertEquals(Double.POSITIVE_INFINITY, avNoOfCommentsPerUser,0);
+    }
+
+    @Test
+    public void averageNumberOfPostsPerUserIsNaNWhenZeroUsersAndZeroPosts() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        List<String> emptyList = new ArrayList<>();
+        when(statisticsMock.usersNames()).thenReturn(emptyList);
         when(statisticsMock.postsCount()).thenReturn(0);
+        AdvStatistics advStatistics = new AdvStatistics(statisticsMock);
+        advStatistics.calculateAdvStatistics(statisticsMock);
+        //When
+        Double avNoOfPostsPerUser = advStatistics.getAvgNoOfPostsPerUser();
+        //Then
+        Assert.assertEquals(Double.NaN, avNoOfPostsPerUser,0);
+    }
+
+    @Test
+    public void averageNumberOfCommentsPerUserIsNaNWhenZeroUsersAndZeroComments() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        List<String> emptyList = new ArrayList<>();
+        when(statisticsMock.usersNames()).thenReturn(emptyList);
         when(statisticsMock.commentsCount()).thenReturn(0);
         AdvStatistics advStatistics = new AdvStatistics(statisticsMock);
         advStatistics.calculateAdvStatistics(statisticsMock);
         //When
-        double anoppu = advStatistics.getAvgNoOfPostsPerUser();
-        double anocpu = advStatistics.getAvgNoOfCommentsPerUser();
-        double anocpp = advStatistics.getAvgNoOgCommentsPerPost();
-        //Then
-        Assert.assertEquals(0, anoppu,0);
-        Assert.assertEquals(0, anocpu,0);
-        Assert.assertEquals(-1, anocpp,0);
 
-        //Given scenario 2: users no = 100, posts number = 1000 > comments no = 100
-        when(statisticsMock.postsCount()).thenReturn(1000);
-        when(statisticsMock.commentsCount()).thenReturn(100);
-        advStatistics = new AdvStatistics(statisticsMock);
+        Double avNoOfCommentsPerUser = advStatistics.getAvgNoOfCommentsPerUser();
+        //Then
+        Assert.assertEquals(Double.NaN, avNoOfCommentsPerUser,0);
+    }
+
+    @Test
+    public void averageNumberOfCommentsPerPostIsNaNWhenZeroPostsAndZeroComments() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        when(statisticsMock.commentsCount()).thenReturn(0);
+        when(statisticsMock.postsCount()).thenReturn(0);
+        AdvStatistics advStatistics = new AdvStatistics(statisticsMock);
         advStatistics.calculateAdvStatistics(statisticsMock);
         //When
-        anoppu = advStatistics.getAvgNoOfPostsPerUser();
-        anocpp = advStatistics.getAvgNoOgCommentsPerPost();
-        anocpu = advStatistics.getAvgNoOfCommentsPerUser();
-        //Then
-        Assert.assertEquals(10, anoppu,0);
-        Assert.assertEquals(0.1, anocpp,0);
-        Assert.assertEquals(1, anocpu,0);
 
-        //Given scenario 3: users no = 100, posts number = 10 < comments no = 100
-        when(statisticsMock.postsCount()).thenReturn(10);
-        advStatistics = new AdvStatistics(statisticsMock);
+        Double avNoOfCommentsPerPost = advStatistics.getAvgNoOfCommentsPerPost();
+        //Then
+        Assert.assertEquals(Double.NaN, avNoOfCommentsPerPost,0);
+    }
+
+    @Test
+    public void averageNumberOfCommentsPerPostIsPositiveInfinityWhenZeroPosts() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        when(statisticsMock.commentsCount()).thenReturn(1);
+        when(statisticsMock.postsCount()).thenReturn(0);
+        AdvStatistics advStatistics = new AdvStatistics(statisticsMock);
         advStatistics.calculateAdvStatistics(statisticsMock);
         //When
-        anoppu = advStatistics.getAvgNoOfPostsPerUser();
-        anocpp = advStatistics.getAvgNoOgCommentsPerPost();
-        //Then
-        Assert.assertEquals(0.1, anoppu,0);
-        Assert.assertEquals(10, anocpp,0);
 
-        //Given scenario 4: users no = 0
-        when(statisticsMock.usersNames()).thenReturn(emptyList);
-        advStatistics = new AdvStatistics(statisticsMock);
+        Double avNoOfCommentsPerPost = advStatistics.getAvgNoOfCommentsPerPost();
+        //Then
+        Assert.assertEquals(Double.POSITIVE_INFINITY, avNoOfCommentsPerPost,0);
+    }
+
+    @Test
+    public void averageNumberOfCommentsPerPostWhenNoOfPostsIsGreaterThanComments() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        when(statisticsMock.commentsCount()).thenReturn(2);
+        when(statisticsMock.postsCount()).thenReturn(4);
+        AdvStatistics advStatistics = new AdvStatistics(statisticsMock);
         advStatistics.calculateAdvStatistics(statisticsMock);
         //When
-        anoppu = advStatistics.getAvgNoOfPostsPerUser();
-        anocpu = advStatistics.getAvgNoOfCommentsPerUser();
-
+        Double avNoOfCommentsPerPost = advStatistics.getAvgNoOfCommentsPerPost();
         //Then
-        Assert.assertEquals(-1, anoppu,0);
-        Assert.assertEquals(-1, anocpu,0);
+        Assert.assertEquals(0.5, avNoOfCommentsPerPost,0);
+    }
+
+    @Test
+    public void averageNumberOfCommentsPerPostWhenNoOfCommentsIsGreaterThanPosts() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        when(statisticsMock.commentsCount()).thenReturn(4);
+        when(statisticsMock.postsCount()).thenReturn(2);
+        AdvStatistics advStatistics = new AdvStatistics(statisticsMock);
+        advStatistics.calculateAdvStatistics(statisticsMock);
+        //When
+        Double avNoOfCommentsPerPost = advStatistics.getAvgNoOfCommentsPerPost();
+        //Then
+        Assert.assertEquals(2, avNoOfCommentsPerPost,0);
+    }
+
+    @Test
+    public void calculatedStatisticsForNonZeroInputs() {
+        //Given
+        Statistics statisticsMock = mock(Statistics.class);
+        List<String> list = generateListOfUsers(10);
+        when(statisticsMock.usersNames()).thenReturn(list);
+        when(statisticsMock.commentsCount()).thenReturn(4);
+        when(statisticsMock.postsCount()).thenReturn(2);
+        AdvStatistics advStatistics = new AdvStatistics(statisticsMock);
+        advStatistics.calculateAdvStatistics(statisticsMock);
+        //When
+        Double avNoOfCommentsPerPost = advStatistics.getAvgNoOfCommentsPerPost();
+        //Then
+        Assert.assertEquals(2, avNoOfCommentsPerPost,0);
     }
 
     @Test
