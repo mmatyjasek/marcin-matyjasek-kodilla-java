@@ -34,5 +34,8 @@ public class StreamMain {
         poemBeautifier.beautify("Marcin Matyjasek",text -> text.substring(7).toLowerCase() + "."
                 + text.substring(0,6).toLowerCase() + "@gmail.com");
 
+        System.out.println("\nUsing Stream to generate even numbers from 1 to 20");
+        NumbersGenerator.generateEven(20);
+
     }
 }
