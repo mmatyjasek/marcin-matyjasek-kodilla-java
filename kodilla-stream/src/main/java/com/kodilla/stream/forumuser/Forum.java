@@ -1,11 +1,10 @@
 package com.kodilla.stream.forumuser;
-import com.kodilla.stream.forumuser.ForumUser;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Forum {
+public final class Forum {
     private final List<ForumUser> theUsersList = new ArrayList<>();
 
     public Forum() {

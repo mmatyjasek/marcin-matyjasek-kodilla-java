@@ -3,7 +3,7 @@ package com.kodilla.stream.book;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDirectory {
+public final class BookDirectory {
     private final List<Book> theBookList = new ArrayList<>();
 
         public BookDirectory() {
