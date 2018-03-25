@@ -1,4 +1,5 @@
 package com.kodilla.stream;
+import com.kodilla.stream.forumuser.Forum;
 import com.kodilla.stream.forumuser.ForumUser;
 import java.time.LocalDate;
 import java.util.Map;
