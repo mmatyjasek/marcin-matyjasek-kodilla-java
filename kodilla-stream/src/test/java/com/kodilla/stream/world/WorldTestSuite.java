@@ -10,25 +10,25 @@ public class WorldTestSuite {
     public void testGetPeopleQuantity(){
         //Given
         //Create Countries
-        Country poland = new Country("Poland", 38000000);
-        Country germany = new Country ("Germany", 83000000);
-        Country france = new Country("France", 67000000);
-        Country italy = new Country ("Italy", 60000000);
-        Country unitedKingdom = new Country("United Kingdom", 65000000);
+        Country poland = new Country("Poland", new BigDecimal("38000000"));
+        Country germany = new Country ("Germany", new BigDecimal("83000000"));
+        Country france = new Country("France", new BigDecimal("67000000"));
+        Country italy = new Country ("Italy", new BigDecimal("60000000"));
+        Country unitedKingdom = new Country("United Kingdom", new BigDecimal("65000000"));
 
-        Country usa = new Country ("United States of America", 326000000);
-        Country canada = new Country("Canada",36000000);
+        Country usa = new Country ("United States of America", new BigDecimal("326000000"));
+        Country canada = new Country("Canada",new BigDecimal("36000000"));
 
-        Country china = new Country ("China", 1379000000);
-        Country india = new Country("India", 1324000000);
+        Country china = new Country ("China", new BigDecimal("1379000000"));
+        Country india = new Country("India", new BigDecimal("1324000000"));
 
-        Country algeria = new Country("Algeria", 34000000);
-        Country nigeria = new Country("Nigeria", 146000000);
-        Country egypt = new Country("Egypt", 82000000);
+        Country algeria = new Country("Algeria", new BigDecimal("34000000"));
+        Country nigeria = new Country("Nigeria", new BigDecimal("146000000"));
+        Country egypt = new Country("Egypt", new BigDecimal("82000000"));
 
-        Country brasil = new Country ("Brasil", 203000000);
-        Country columbia = new Country("Columbia", 45000000);
-        Country argentina = new Country("Argentina", 42000000);
+        Country brasil = new Country ("Brasil", new BigDecimal("203000000"));
+        Country columbia = new Country("Columbia", new BigDecimal("45000000"));
+        Country argentina = new Country("Argentina", new BigDecimal("42000000"));
 
         //Create continents
         Continent europe = new Continent("Europe");

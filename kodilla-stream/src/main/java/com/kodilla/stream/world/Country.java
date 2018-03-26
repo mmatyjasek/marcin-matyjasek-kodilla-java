@@ -5,15 +5,15 @@ import java.util.Objects;
 
 public final class Country {
     private final String name;
-    private final int peopleQty;
+    private final BigDecimal peopleQty;
 
-    public Country(final String name, final int peopleQty) {
+    public Country(final String name, final BigDecimal peopleQty) {
         this.name = name;
         this.peopleQty = peopleQty;
     }
 
     public BigDecimal getPeopleQty() {
-        return new BigDecimal(peopleQty);
+        return peopleQty;
     }
 
     public String getName() {
