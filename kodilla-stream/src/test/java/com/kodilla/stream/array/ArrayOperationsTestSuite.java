@@ -31,26 +31,25 @@ public class ArrayOperationsTestSuite {
     @Test
     public void testAverageForEmptyArray() {
         //Given
-        ArrayOperations average = new Average();
+
 
         //When
         int []numbers = {};
 
         //Then
-        double result = average.getAverage(numbers);
+        double result = ArrayOperations.getAverage(numbers);
         Assert.assertEquals(0, result,0);
     }
 
     @Test
     public void testAverageForNonEmptyArray() {
         //Given
-        ArrayOperations average = new Average();
 
         //When
-        int []numbers = {0,0,0};
+        int []numbers = {1,2,3};
 
         //Then
-        double result = average.getAverage(numbers);
-        Assert.assertEquals(0, result,0);
+        double result = ArrayOperations.getAverage(numbers);
+        Assert.assertEquals(2, result,0);
     }
 }
