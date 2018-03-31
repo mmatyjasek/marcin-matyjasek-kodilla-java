@@ -8,7 +8,7 @@ public class FigurePick {
         Scanner scanner = new Scanner(System.in);
         int playersFigureNumber = 0;
         while (playersFigureNumber < 1 || playersFigureNumber > 3) {
-            System.out.println("Wybierz figure: 1 - kamien, 2 - papier, 3 - nozyce\n");
+            System.out.println("Wybierz figure: 1 - Nożyce, 2 - Papier, 3 - Kamień\n");
             while (!scanner.hasNextInt()) {
                 scanner.next();
             }

@@ -1,7 +1,6 @@
 package com.kodilla.rps;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,15 +8,8 @@ public class RpsRunner {
     public static void main(String[] args) throws IOException {
 
         boolean end = false;
-        final List<Figure> figuresList= new ArrayList<>();
-
-        Figure nozyce = new Figure("Nożyce");
-        Figure papier = new Figure("Papier");
-        Figure kamien = new Figure("Kamień");
-
-        figuresList.add(nozyce);
-        figuresList.add(papier);
-        figuresList.add(kamien);
+        FiguresList figuresList = new FiguresList();
+        List<Figure> list = figuresList.getFigures();
 
 
         GameModePick gameModePick = new GameModePick();
@@ -45,10 +37,10 @@ public class RpsRunner {
                 int gameModeNumber = gameModePick.selectGameMode();
 
                 int playersFigureNumber = figurePick.pickYourFigure();
-                System.out.println("Wybrałeś: " + figurePick.returnFigure(playersFigureNumber,figuresList).toString().toUpperCase());
+                System.out.println("Wybrałeś: " + figurePick.returnFigure(playersFigureNumber,list).toString().toUpperCase());
 
                 int computersFigureNumber = computersDraw.drawsComputersFigureNo(gameModeNumber, playersFigureNumber);
-                System.out.println("Komputer wybrał: " + figurePick.returnFigure(computersFigureNumber,figuresList).toString().toUpperCase() + "\n");
+                System.out.println("Komputer wybrał: " + figurePick.returnFigure(computersFigureNumber,list).toString().toUpperCase() + "\n");
 
                 int result = validator.validate(playersFigureNumber, computersFigureNumber);
 

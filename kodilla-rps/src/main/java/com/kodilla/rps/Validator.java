@@ -8,9 +8,9 @@ public class Validator {
             return 0;
         }else if((playersFigureNo == 0  && computersFigureNo == 1) || (playersFigureNo == 1  && computersFigureNo == 2)
                 || (playersFigureNo == 2  && computersFigureNo == 0)){
-            return 2;
-        } else {
             return 1;
+        } else {
+            return 2;
         }
 
     }

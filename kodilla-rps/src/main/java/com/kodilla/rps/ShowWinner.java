@@ -14,11 +14,11 @@ public class ShowWinner {
 
     public void printGameWinner(int playersResult, int computersResult, String name ){
         if (playersResult > computersResult) {
-            System.out.println("BRAWO" + name.toUpperCase() + "!!! Wygrałeś/aś! :-)\n");
+            System.out.println("BRAWO " + name.toUpperCase() + "!!! WYGRAłeś/aś! :-)\n");
         } else if (playersResult < computersResult) {
-            System.out.println("Niestety tym razem wygrał komputer :-(\n");
+            System.out.println("NIESTETY TYM RAZEM WYGRAł KOMPUTER :-( SPRÓBUJ JESZCZE RAZ\n");
         } else {
-            System.out.println("Rozgrywka zakończona remisem :-|\n");
+            System.out.println("ROZGRYWKA ZAKONCZONA REMISEM :-|\n");
         }
     }
 

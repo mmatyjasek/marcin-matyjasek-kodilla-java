@@ -5,14 +5,16 @@ import java.util.List;
 
 public class FiguresList {
 
-    private List<Figure> figuresList = new ArrayList<>();
+    private final List<Figure> figures = new ArrayList<>();
 
-    public void addFigure(Figure figure){
-        figuresList.add(figure);
-    }
-
-    public Figure getFigure(int n) {
-        return figuresList.get(n-1);
+    public List<Figure> getFigures() {
+        Figure nozyce = new Figure("Nożyce");
+        Figure papier = new Figure("Papier");
+        Figure kamien = new Figure("Kamień");
+        figures.add(nozyce);
+        figures.add(papier);
+        figures.add(kamien);
+        return new ArrayList<>(figures);
     }
 
 }

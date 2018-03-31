@@ -1,7 +1,6 @@
 package com.kodilla.rps;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -9,6 +8,29 @@ import java.util.List;
 
 
 public class RpsTestSuite {
+    private static int testCounter = 0;
+
+    @BeforeClass
+    public static void beforeAllTests() {
+        System.out.println("This is the beginning of tests.\n");
+    }
+
+    @AfterClass
+    public static void afterAllTests() {
+        System.out.println("All tests are finished.");
+    }
+
+    @Before
+    public void beforeEveryTest() {
+        testCounter++;
+        System.out.println("Preparing to execute test #" + testCounter);
+    }
+
+    @After
+    public void afterEveryTest() {
+
+        System.out.println("\n");
+    }
 
     @Test
     public void testReturnNoOfRounds() {
@@ -173,13 +195,13 @@ public class RpsTestSuite {
 
         //Then
         Assert.assertEquals(0, result1);
-        Assert.assertEquals(2, result2);
-        Assert.assertEquals(1, result3);
-        Assert.assertEquals(1, result4);
+        Assert.assertEquals(1, result2);
+        Assert.assertEquals(2, result3);
+        Assert.assertEquals(2, result4);
         Assert.assertEquals(0, result5);
-        Assert.assertEquals(2, result6);
-        Assert.assertEquals(2, result7);
-        Assert.assertEquals(1, result8);
+        Assert.assertEquals(1, result6);
+        Assert.assertEquals(1, result7);
+        Assert.assertEquals(2, result8);
         Assert.assertEquals(0, result9);
     }
 
@@ -187,36 +209,35 @@ public class RpsTestSuite {
     public void testIsCorrectFigureForPlayersInput(){
         //Given
         FigurePick figurePick = new FigurePick();
-        List<Figure> figuresList = new ArrayList<>();
-        Figure kamien = new Figure("Kamień");
-        Figure papier = new Figure("Papier");
+        FiguresList figuresList = new FiguresList();
         Figure nozyce = new Figure("Nożyce");
+        Figure papier = new Figure("Papier");
+        Figure kamien = new Figure("Kamień");
 
-        figuresList.add(kamien);
-        figuresList.add(papier);
-        figuresList.add(nozyce);
         //when
+        List<Figure> list = figuresList.getFigures();
+
         ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
         System.setIn(in);
         int resultFigureNo  = figurePick.pickYourFigure();
-        Figure resultFigure = figurePick.returnFigure(resultFigureNo, figuresList);
+        Figure resultFigure = figurePick.returnFigure(resultFigureNo,list);
 
         in = new ByteArrayInputStream("2".getBytes());
         System.setIn(in);
         int resultFigureNo2  = figurePick.pickYourFigure();
-        Figure resultFigure2 = figurePick.returnFigure(resultFigureNo2, figuresList);
+        Figure resultFigure2 = figurePick.returnFigure(resultFigureNo2, list);
         System.setIn(System.in);
 
         in = new ByteArrayInputStream("3".getBytes());
         System.setIn(in);
         int resultFigureNo3  = figurePick.pickYourFigure();
-        Figure resultFigure3 = figurePick.returnFigure(resultFigureNo3, figuresList);
+        Figure resultFigure3 = figurePick.returnFigure(resultFigureNo3, list);
         System.setIn(System.in);
 
         //Then
-        Assert.assertEquals(kamien, resultFigure);
+        Assert.assertEquals(nozyce, resultFigure);
         Assert.assertEquals(papier, resultFigure2);
-        Assert.assertEquals(nozyce, resultFigure3);
+        Assert.assertEquals(kamien, resultFigure3);
     }
 
     @Test
