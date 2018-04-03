@@ -2,18 +2,16 @@ package com.kodilla.rps;
 
 public class ComputersDraw {
 
-        public int drawsComputersFigureNo(int gameModeNo, int playersFigNo){
-        FigureDrawer figureDrawer = new FigureDrawer();
-        int computersFigureNo;
+    private static final int PERCENT_50 = 50;
+    private FigureDrawer figureDrawer = new FigureDrawer();
 
-        if(gameModeNo==1) {
-            computersFigureNo = figureDrawer.generator(50, playersFigNo);
-        }else if (gameModeNo==2){
-            computersFigureNo = figureDrawer.generator(30, playersFigNo);
-        }else{
-            computersFigureNo = figureDrawer.generator(20, playersFigNo);
+    public int drawsComputersFigureNo(int gameModeNo, int playersFigNo) {
+        if (gameModeNo == 1) {
+            return figureDrawer.generator(PERCENT_50, playersFigNo);
+        } else if (gameModeNo == 2) {
+            return figureDrawer.generator(30, playersFigNo);
+        } else {
+            return figureDrawer.generator(20, playersFigNo);
         }
-
-        return  computersFigureNo;
     }
 }
