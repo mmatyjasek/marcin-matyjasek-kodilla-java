@@ -10,7 +10,7 @@ public class FigureDrawer {
     private static final int ONE_HUNDERT = 100;
 
     public int generator(int winProb, int playersFigNo) {
-        List<Integer> num = Arrays.asList(0, 1, 2);
+        List<Integer> num = new ArrayList<>(Arrays.asList(0, 1, 2));
         num.remove(getWinningNumber(playersFigNo));
 
         int val = random.nextInt(ONE_HUNDERT);
