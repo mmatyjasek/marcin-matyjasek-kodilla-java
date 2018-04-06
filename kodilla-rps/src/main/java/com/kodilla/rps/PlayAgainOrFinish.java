@@ -12,10 +12,6 @@ public class PlayAgainOrFinish {
             c = scanner.next().charAt(0);
         }
 
-        if (c == 'x' || c == 'X') {
-            return true;
-        } else {
-            return false;
-        }
+        return c == 'x' || c == 'X';
     }
 }

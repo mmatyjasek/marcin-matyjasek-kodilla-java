@@ -4,23 +4,30 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.IntStream;
 
-public class FigureDrawer{
+public class FigureDrawer {
 
-    public int generator(int winProb, int n) {
-        int result;
-        Random random = new Random();
-        List<Integer> num = new ArrayList<>(Arrays.asList(0,1,2));
+    private static final Random random = new Random();
+    private static final int ONE_HUNDERT = 100;
 
-        num.remove(n+1-n/2*3);
-        int val = random.nextInt(100);
-        if (val < winProb) {
-            result = n+1-n/2*3;
-        } else{
-            result = num.get(random.nextInt(2));
+    public int generator(int winProb, int playersFigNo) {
+        List<Integer> num = new ArrayList<>(Arrays.asList(0, 1, 2));
+        num.remove(getWinningNumber(playersFigNo));
+
+        int val = random.nextInt(ONE_HUNDERT);
+        if (winProb >= val) {
+            return getWinningNumber(playersFigNo);
+        } else {
+            return num.get(random.nextInt(2));
         }
-        return result;
+    }
+
+    private int getWinningNumber(int playersFigNo) {
+        if (playersFigNo == 2) {
+            return 0;
+        } else {
+            return playersFigNo + 1;
+        }
     }
 }
 

@@ -5,20 +5,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class RpsRunner {
+
+    private static GameModePick gameModePick = new GameModePick();
+    private static FigurePick figurePick = new FigurePick();
+    private static ComputersDraw computersDraw = new ComputersDraw();
+    private static NumberOfRounds numberOfRounds = new NumberOfRounds();
+    private static Validator validator = new Validator();
+    private static ShowWinner showWinner = new ShowWinner();
+    private static PlayAgainOrFinish playAgainOrFinish = new PlayAgainOrFinish();
+
     public static void main(String[] args) throws IOException {
 
         boolean end = false;
         FiguresList figuresList = new FiguresList();
         List<Figure> list = figuresList.getFigures();
-
-
-        GameModePick gameModePick = new GameModePick();
-        FigurePick figurePick = new FigurePick();
-        ComputersDraw computersDraw = new ComputersDraw();
-        NumberOfRounds numberOfRounds = new NumberOfRounds();
-        Validator validator = new Validator();
-        ShowWinner showWinner = new ShowWinner();
-        PlayAgainOrFinish playAgainOrFinish = new PlayAgainOrFinish();
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj swoje imię: ");
