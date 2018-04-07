@@ -1,4 +1,6 @@
-package com.kodilla.good.patterns.challenges;
+package com.kodilla.good.patterns.challenges.eshopping.services;
+
+import com.kodilla.good.patterns.challenges.eshopping.order.OrderRequest;
 
 public class ProductOrderRepository implements OrderRepository {
 

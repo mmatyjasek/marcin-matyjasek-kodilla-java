@@ -1,4 +1,6 @@
-package com.kodilla.good.patterns.challenges;
+package com.kodilla.good.patterns.challenges.eshopping.oderprocessing;
+
+import com.kodilla.good.patterns.challenges.eshopping.user.User;
 
 public class OrderDto {
 

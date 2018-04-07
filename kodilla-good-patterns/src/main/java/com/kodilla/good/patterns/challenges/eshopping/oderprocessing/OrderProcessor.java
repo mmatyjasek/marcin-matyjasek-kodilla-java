@@ -1,4 +1,10 @@
-package com.kodilla.good.patterns.challenges;
+package com.kodilla.good.patterns.challenges.eshopping.oderprocessing;
+
+import com.kodilla.good.patterns.challenges.eshopping.order.OrderRequest;
+import com.kodilla.good.patterns.challenges.eshopping.order.OrderService;
+import com.kodilla.good.patterns.challenges.eshopping.services.ConfirmationService;
+import com.kodilla.good.patterns.challenges.eshopping.services.OrderRepository;
+import com.kodilla.good.patterns.challenges.eshopping.services.PaymentService;
 
 public class OrderProcessor {
 
