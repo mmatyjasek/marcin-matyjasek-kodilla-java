@@ -11,6 +11,7 @@ public class GlutenFreeShop implements NewProducer {
     private OrderService orderService;
     private TransportTime transportTime;
     private OrderRepository orderRepository;
+    private static final int ZERO = 0;
 
     public GlutenFreeShop(OrderService orderService, TransportTime transportTime, OrderRepository orderRepository) {
         this.orderService = orderService;
@@ -19,7 +20,7 @@ public class GlutenFreeShop implements NewProducer {
     }
 
     @Override
-    public String returnName() {
+    public String getName() {
         return "Gluten Free Shop";
     }
 
@@ -31,7 +32,7 @@ public class GlutenFreeShop implements NewProducer {
             transportDays = transportTime.calculate(orderRequest.getBuyer());
             orderRepository.save(orderRequest);
         } else {
-            transportDays = 0;
+            transportDays = ZERO;
         }
 
         return new ProducerOrderDto(isOrdered, transportDays);

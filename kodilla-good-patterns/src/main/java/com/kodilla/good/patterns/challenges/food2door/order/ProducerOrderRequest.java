@@ -41,7 +41,7 @@ public class ProducerOrderRequest {
                 "orderNumber: " + this.getOrderNumber() + '\'' +
                 "; buyer: " + this.getBuyer().getUsername() +
                 "; basket: " + this.getBasket().toString() +
-                "; producer: " + this.getProducer().returnName() +
+                "; producer: " + this.getProducer().getName() +
                 '}';
     }
 }

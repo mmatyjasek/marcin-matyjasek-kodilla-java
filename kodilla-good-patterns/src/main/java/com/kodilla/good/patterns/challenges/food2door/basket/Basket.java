@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Basket {
 
-    Map<Product, Double> shoppingList = new HashMap<>();
+    private Map<Product, Double> shoppingList = new HashMap<>();
 
     public void addToShoppingList(Product product, Double quantity){
             shoppingList.put(product, quantity);

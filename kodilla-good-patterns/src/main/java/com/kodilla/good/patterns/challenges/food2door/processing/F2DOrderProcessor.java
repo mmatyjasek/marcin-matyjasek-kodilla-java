@@ -23,13 +23,13 @@ public class F2DOrderProcessor {
         boolean isOrdered = producerOrderDto.isOrdered();
 
         if(isOrdered){
-            System.out.println("Confirmation from " + producerOrderRequest.getProducer().returnName() + " received");
+            System.out.println("Confirmation from " + producerOrderRequest.getProducer().getName() + " received");
             confirmationService.confirm(producerOrderRequest.getBuyer(), producerOrderDto.getTransportDays());
             orderRepository.save(producerOrderRequest);
             paymentService.pay(producerOrderRequest);
             return new OrderDto(producerOrderRequest.getBuyer(), producerOrderRequest.getOrderNumber(), true);
         } else {
-            System.out.println("Confirmation from " + producerOrderRequest.getProducer().returnName() + " not received");
+            System.out.println("Confirmation from " + producerOrderRequest.getProducer().getName() + " not received");
             return new OrderDto(producerOrderRequest.getBuyer(), producerOrderRequest.getOrderNumber(), false);
         }
     }

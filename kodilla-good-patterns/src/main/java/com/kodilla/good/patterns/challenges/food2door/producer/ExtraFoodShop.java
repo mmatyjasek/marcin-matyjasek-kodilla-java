@@ -9,14 +9,14 @@ public class ExtraFoodShop implements NewProducer{
 
     private OrderService orderService;
     private TransportTime transportTime;
-
+    private static final int ZERO = 0;
     public ExtraFoodShop(OrderService orderService, TransportTime transportTime) {
         this.orderService = orderService;
         this.transportTime = transportTime;
     }
 
     @Override
-    public String returnName(){
+    public String getName(){
         return "Extra Food Shop";
     }
 
@@ -27,7 +27,7 @@ public class ExtraFoodShop implements NewProducer{
         if(isOrdered) {
             transportDays = transportTime.calculate(orderRequest.getBuyer());
         } else {
-            transportDays = 0;
+            transportDays = ZERO;
         }
 
         return new ProducerOrderDto(isOrdered, transportDays);

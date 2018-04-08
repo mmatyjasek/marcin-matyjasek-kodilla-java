@@ -5,6 +5,6 @@ import com.kodilla.good.patterns.challenges.food2door.processing.ProducerOrderDt
 
 public interface NewProducer {
 
-    String returnName();
+    String getName();
     ProducerOrderDto process(ProducerOrderRequest orderRequest);
 }

@@ -10,6 +10,7 @@ public class HealthyShop implements NewProducer {
     private OrderService orderService;
     private TransportTime transportTime;
     private ConfirmationService confirmationService;
+    private static final int ZERO = 0;
 
     public HealthyShop(OrderService orderService, TransportTime transportTime, ConfirmationService confirmationService) {
         this.orderService = orderService;
@@ -18,7 +19,7 @@ public class HealthyShop implements NewProducer {
     }
 
     @Override
-    public String returnName() {
+    public String getName() {
         return "Healthy Shop";
     }
 
@@ -30,7 +31,7 @@ public class HealthyShop implements NewProducer {
             transportDays = transportTime.calculate(orderRequest.getBuyer());
             confirmationService.confirm(orderRequest.getBuyer());
         } else {
-            transportDays = 0;
+            transportDays = ZERO;
         }
 
         return new ProducerOrderDto(isOrdered, transportDays);

@@ -7,7 +7,7 @@ public class FoodOrderService implements OrderService {
 
         System.out.println(orderRequest.getBuyer().getUsername() + " is buying: " + orderRequest.getBasket() + ".");
         System.out.println("Your order no " + orderRequest.getOrderNumber()
-                + " is being processed by " + orderRequest.getProducer().returnName() + "...\n");
+                + " is being processed by " + orderRequest.getProducer().getName() + "...\n");
 
         return true;
     }
