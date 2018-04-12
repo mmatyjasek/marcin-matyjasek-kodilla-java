@@ -106,9 +106,9 @@ public class RpsTestSuite {
 
         //Then
         Assert.assertEquals(0, others);
-        Assert.assertEquals(50, percentOf2,0.5);
-        Assert.assertEquals(25, percentOf1,0.5);
-        Assert.assertEquals(25, percentOf3,0.5);
+        Assert.assertEquals(50, percentOf2,2);
+        Assert.assertEquals(25, percentOf1,2);
+        Assert.assertEquals(25, percentOf3,2);
     }
 
     @Test
@@ -128,9 +128,9 @@ public class RpsTestSuite {
 
         //Then
         Assert.assertEquals(0, others);
-        Assert.assertEquals(50, percentOf2,0.5);
-        Assert.assertEquals(25, percentOf1,0.5);
-        Assert.assertEquals(25, percentOf3,0.5);
+        Assert.assertEquals(50, percentOf2,2);
+        Assert.assertEquals(25, percentOf1,2);
+        Assert.assertEquals(25, percentOf3,2);
     }
 
     @Test
@@ -150,9 +150,9 @@ public class RpsTestSuite {
 
         //Then
         Assert.assertEquals(0, others);
-        Assert.assertEquals(30, percentOf2,1);
-        Assert.assertEquals(35, percentOf1,1);
-        Assert.assertEquals(35, percentOf3,1);
+        Assert.assertEquals(30, percentOf2,2);
+        Assert.assertEquals(35, percentOf1,2);
+        Assert.assertEquals(35, percentOf3,2);
     }
 
     @Test
@@ -172,9 +172,9 @@ public class RpsTestSuite {
 
         //Then
         Assert.assertEquals(0, others);
-        Assert.assertEquals(20, percentOf2,1);
-        Assert.assertEquals(40, percentOf1,1);
-        Assert.assertEquals(40, percentOf3,1);
+        Assert.assertEquals(20, percentOf2,2);
+        Assert.assertEquals(40, percentOf1,2);
+        Assert.assertEquals(40, percentOf3,2);
     }
 
     @Test
