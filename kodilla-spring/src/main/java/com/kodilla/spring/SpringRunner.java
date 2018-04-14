@@ -1,6 +1,5 @@
 package com.kodilla.spring;
 
-import com.kodilla.spring.shape.forum.ForumUser;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

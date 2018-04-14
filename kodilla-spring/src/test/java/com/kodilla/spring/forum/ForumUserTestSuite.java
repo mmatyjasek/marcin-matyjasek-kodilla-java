@@ -1,7 +1,6 @@
 package com.kodilla.spring.forum;
 
 
-import com.kodilla.spring.shape.forum.ForumUser;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
