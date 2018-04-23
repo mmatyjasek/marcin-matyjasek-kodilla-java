@@ -19,6 +19,8 @@ public class TaskFactoryTestSuite {
         Assert.assertEquals("Shopping", shoppingTask2.getTaskName());
         Assert.assertTrue(shoppingTask1.isTaskExecuted());
         Assert.assertFalse(shoppingTask2.isTaskExecuted());
+        Assert.assertTrue(shoppingTask1 instanceof ShoppingTask);
+        Assert.assertTrue(shoppingTask2 instanceof ShoppingTask);
     }
 
     @Test
@@ -34,6 +36,8 @@ public class TaskFactoryTestSuite {
         Assert.assertEquals("Painting", paintingTask2.getTaskName());
         Assert.assertTrue(paintingTask1.isTaskExecuted());
         Assert.assertFalse(paintingTask2.isTaskExecuted());
+        Assert.assertTrue(paintingTask1 instanceof PaintingTask);
+        Assert.assertTrue(paintingTask2 instanceof PaintingTask);
     }
 
     @Test
@@ -49,5 +53,7 @@ public class TaskFactoryTestSuite {
         Assert.assertEquals("Driving", drivingTask1.getTaskName());
         Assert.assertTrue(drivingTask1.isTaskExecuted());
         Assert.assertFalse(drivingTask2.isTaskExecuted());
+        Assert.assertTrue(drivingTask1 instanceof DrivingTask);
+        Assert.assertTrue(drivingTask2 instanceof DrivingTask);
     }
 }
