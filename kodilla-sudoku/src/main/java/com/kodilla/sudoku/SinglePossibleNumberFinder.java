@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SinglePossibleNumberFinder {
-    private final PossibleNumbersFinder possibleNumbersFinder;
-    private final SudokuBoard sudokuBoard;
 
-    public SinglePossibleNumberFinder(PossibleNumbersFinder possibleNumbersFinder, SudokuBoard sudokuBoard) {
+    private final SudokuBoard sudokuBoard;
+    private PossibleNumbersFinder possibleNumbersFinder;
+
+    public SinglePossibleNumberFinder(SudokuBoard sudokuBoard) {
         this.possibleNumbersFinder = new PossibleNumbersFinder(sudokuBoard);
         this.sudokuBoard = sudokuBoard;
     }
@@ -47,16 +48,16 @@ public class SinglePossibleNumberFinder {
         }
 
         if ((findSinglePossibleInARow(row, col).size() == 1 && findSinglePossibleInAColumn(col, row).size() == 1
-                && findSinglePossibleInARow(row, col).get(0) == findSinglePossibleInAColumn(col, row).get(0))
+                && findSinglePossibleInARow(row, col).get(0).equals(findSinglePossibleInAColumn(col, row).get(0)))
                 || (findSinglePossibleInARow(row, col).size() == 1 && findSinglePossibleInABlock(row, col).size() == 1
-                && findSinglePossibleInARow(row, col).get(0) == findSinglePossibleInABlock(row, col).get(0))) {
+                && findSinglePossibleInARow(row, col).get(0).equals(findSinglePossibleInABlock(row, col).get(0)))) {
 
             return findSinglePossibleInARow(row, col).get(0);
 
         }
 
-        if ((findSinglePossibleInABlock(row, col).size() == 1 && findSinglePossibleInAColumn(col, row).size() == 1
-                && findSinglePossibleInABlock(row, col).get(0) == findSinglePossibleInAColumn(col, row).get(0))) {
+        if (findSinglePossibleInABlock(row, col).size() == 1 && findSinglePossibleInAColumn(col, row).size() == 1
+                && findSinglePossibleInABlock(row, col).get(0).equals(findSinglePossibleInAColumn(col, row).get(0))) {
             return findSinglePossibleInABlock(row, col).get(0);
 
         }

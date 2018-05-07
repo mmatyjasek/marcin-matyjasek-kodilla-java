@@ -2,23 +2,27 @@ package com.kodilla.sudoku;
 
 public class BlockIndex {
 
-    public int findBlockMaxIndex(int i){
-        if (i < 3) {
-            return 3;
-        } else if (i < 6) {
-            return 6;
+    private final static int ZERO = 0;
+    private final static int FIRST = 3;
+    private final static int SECOND = 6;
+    private final static int LAST = 9;
+
+
+    private int find(int i, int first, int second, int last) {
+        if (i < FIRST) {
+            return first;
+        } else if (i < SECOND) {
+            return second;
         } else {
-            return 9;
+            return last;
         }
     }
 
+    public int findBlockMaxIndex(int i){
+        return find(i, FIRST, SECOND, LAST);
+    }
+
     public int findBlockMinIndex(int i){
-        if (i < 3) {
-            return 0;
-        } else if (i < 6) {
-            return 3;
-        } else {
-            return 6;
-        }
+        return find(i, ZERO, FIRST, SECOND);
     }
 }

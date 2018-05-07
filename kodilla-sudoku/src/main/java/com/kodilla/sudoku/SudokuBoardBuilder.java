@@ -3,7 +3,6 @@ package com.kodilla.sudoku;
 public class SudokuBoardBuilder {
 
     public SudokuBoard build(String input) {
-
         SudokuBoard sudokuBoard = new SudokuBoard();
         int numberOfInsertedDigits =  input.length()/3;
         for (int i = 0; i < numberOfInsertedDigits; i++) {

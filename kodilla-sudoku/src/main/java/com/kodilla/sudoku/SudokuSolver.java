@@ -9,34 +9,35 @@ public class SudokuSolver {
 
     public SudokuDto solve(SudokuBoard board){
         boolean result;
-        boolean isSolution = true;
-        int count=0;
+        boolean isSolution;
+        int count;
         InsertedNumbersFinder insertedNumbersFinder = new InsertedNumbersFinder(board);
-        SinglePossibleNumberFinder singlePossibleNumberFinder = new SinglePossibleNumberFinder(new PossibleNumbersFinder(board), board);
+        SinglePossibleNumberFinder singlePossibleNumberFinder = new SinglePossibleNumberFinder(board);
+
         do {
             isSolution = true;
             result = false;
             count = 0;
-            for (int n = MIN_INDEX; n < MAX_INDEX; n++) {
-                for (int m = MIN_INDEX; m < MAX_INDEX; m++) {
-                    if (board.getBoard().get(n).getElement(m).getNumber() == EMPTY) {
-                        for (Integer number : insertedNumbersFinder.findNumbers(n, m)) {
-                            if (board.getBoard().get(n).getElement(m).getNumbers().contains(number)) {
-                                board.getBoard().get(n).getElement(m).getNumbers().remove(number);
+            for (int row = MIN_INDEX; row < MAX_INDEX; row++) {
+                for (int col = MIN_INDEX; col < MAX_INDEX; col++) {
+                    if (board.getBoard().get(row).getElement(col).getNumber() == EMPTY) {
+                        for (Integer number : insertedNumbersFinder.findNumbers(row, col)) {
+                            if (board.getBoard().get(row).getElement(col).getNumbers().contains(number)) {
+                                board.getBoard().get(row).getElement(col).removeNumber(number);
                                 result = true;
                             }
                         }
-                        if(board.getBoard().get(n).getElement(m).getNumbers().size() == 0) {
+                        if(board.getBoard().get(row).getElement(col).getNumbers().size() == 0) {
                             isSolution = false;
                         }
 
-                        if (board.getBoard().get(n).getElement(m).getNumbers().size() == 1) {
-                            board.getBoard().get(n).getElement(m).setNumber(board.getBoard().get(n).getElement(m).getNumbers().get(0));
+                        if (board.getBoard().get(row).getElement(col).getNumbers().size() == 1) {
+                            board.getBoard().get(row).getElement(col).setNumber(board.getBoard().get(row).getElement(col).getNumbers().get(0));
                             result = true;
                         }
 
-                        if (singlePossibleNumberFinder.findSinglePossible(n, m) != 0) {
-                            board.getBoard().get(n).getElement(m).setNumber(singlePossibleNumberFinder.findSinglePossible(n, m));
+                        if (singlePossibleNumberFinder.findSinglePossible(row, col) != 0) {
+                            board.getBoard().get(row).getElement(col).setNumber(singlePossibleNumberFinder.findSinglePossible(row, col));
                             result = true;
                         }
                     } else {

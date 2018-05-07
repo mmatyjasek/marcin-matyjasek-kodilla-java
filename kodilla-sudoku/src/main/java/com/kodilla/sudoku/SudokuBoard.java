@@ -7,34 +7,32 @@ public class SudokuBoard extends Prototype {
 
     public final static int MAX_INDEX = 9;
     public final static int MIN_INDEX = 0;
-    List<SudokuRow> board = new ArrayList<>();
+    private List<SudokuRow> board = new ArrayList<>();
 
     public SudokuBoard() {
-        for (int n = MIN_INDEX; n < MAX_INDEX; n++) {
+        for (int row = MIN_INDEX; row < MAX_INDEX; row++) {
             board.add(new SudokuRow());
         }
     }
-
 
     public List<SudokuRow> getBoard() {
         return board;
     }
 
-    public void setElement(int number, int x, int y) {
-        board.get(x - 1).getElement(y - 1).setNumber(number);
+    public void setElement(int number, int row, int col) {
+        board.get(row - 1).getElement(col - 1).setNumber(number);
     }
-
 
     public String toString() {
         String result = "";
-        for (int n = MIN_INDEX; n < MAX_INDEX; n++) {
+        for (int row = MIN_INDEX; row < MAX_INDEX; row++) {
             result += "  ---   ---   ---   ---   ---   ---   ---   ---   ---\n";
             result += "|";
-            for (int k = MIN_INDEX; k < MAX_INDEX; k++) {
-                if (board.get(n).getElement(k).getNumber() == -1) {
+            for (int col = MIN_INDEX; col < MAX_INDEX; col++) {
+                if (board.get(row).getElement(col).getNumber() == -1) {
                     result += "     ";
                 } else {
-                    result += "  " + board.get(n).getElement(k).getNumber() + "  ";
+                    result += "  " + board.get(row).getElement(col).getNumber() + "  ";
                 }
                 result += "|";
             }
@@ -49,16 +47,15 @@ public class SudokuBoard extends Prototype {
         clonedBoard.board = new ArrayList<>();
         for (SudokuRow row : board) {
             SudokuRow clonedRow = new SudokuRow();
-            int n =0;
+            int col = 0;
             for (SudokuElement element : row.getRow()) {
-                clonedRow.getRow().get(n).setNumber(element.getNumber());
+                clonedRow.getRow().get(col).setNumber(element.getNumber());
                 List<Integer> clonedNumbers = new ArrayList<>(element.getNumbers());
-                clonedRow.getRow().get(n).setNumbers(clonedNumbers);
-                n++;
+                clonedRow.getRow().get(col).setNumbers(clonedNumbers);
+                col++;
             }
             clonedBoard.getBoard().add(clonedRow);
         }
-
         return clonedBoard;
     }
 }
