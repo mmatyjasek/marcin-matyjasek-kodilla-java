@@ -14,7 +14,7 @@ public class InputValidator {
 
     public boolean validateIfDivisibleByThree() {
         if(input.length() % 3 != 0) {
-            System.out.println("Wprowadzony ciąg znaków nie składa się z 3-cyfrowych wpisów.");
+            System.out.println("Wprowadzony ciąg znaków nie składa się z 3-cyfrowych wpisów.\n");
             return false;
         }
         return true;
@@ -24,27 +24,13 @@ public class InputValidator {
         String correctRange = "123456789";
         for(int i=0; i < input.length(); i++) {
             if(!correctRange.contains(Character.toString(input.charAt(i)))) {
-                System.out.println("Nieprawidłowy wpis. Wszytkie znaki powinny być z zakresu cyfr 1 - 9");
+                System.out.println("Nieprawidłowy wpis. Wszytkie znaki powinny być z zakresu cyfr 1 - 9\n");
                 return false;
             }
         }
         return true;
     }
 
-/*    public boolean validateQuantityOfSameNumbers(){
-        int [] count = new int [9];
-        for(int i=0; i < input.length(); i+=3) {
-            count[Character.getNumericValue(input.charAt(i))-1]++;
-        }
-
-        for(int i=0; i< count.length; i++){
-            if(count[i] > 9){
-                System.out.println("Nieprawidłowy wpis. Próbujesz wstawić wiięcej niż 9 takich samych cyfr do tablicy.");
-                return false;
-            }
-        }
-        return true;
-    }*/
 
     public boolean validateDistinctNumbersInARow(){
         List<String> numbersInRow = new ArrayList<>();
@@ -53,7 +39,7 @@ public class InputValidator {
         }
 
         if(numbersInRow.size() != numbersInRow.stream().distinct().count()) {
-            System.out.println("Nieprawidłowy wpis. Cyfry w tym samym rzędzie powtarzają się.");
+            System.out.println("Nieprawidłowy wpis. Cyfry w tym samym rzędzie powtarzają się.\n");
             return false;
         }
         return true;
@@ -66,7 +52,7 @@ public class InputValidator {
         }
 
         if(numbersInColumn.size() != numbersInColumn.stream().distinct().count()) {
-            System.out.println("Nieprawidłowy wpis. Cyfry w tej samej kolumnie powtarzają się.");
+            System.out.println("Nieprawidłowy wpis. Cyfry w tej samej kolumnie powtarzają się.\n");
             return false;
         }
         return true;
@@ -110,7 +96,7 @@ public class InputValidator {
                 || block7.size() != block7.stream().distinct().count() || block8.size() != block8.stream().distinct().count()
                 || block9.size() != block9.stream().distinct().count()) {
 
-            System.out.println("Nieprawidłowy wpis. Cyfry w tym samym bloku powtarzają się.");
+            System.out.println("Nieprawidłowy wpis. Cyfry w tym samym bloku powtarzają się.\n");
             return false;
         }
 

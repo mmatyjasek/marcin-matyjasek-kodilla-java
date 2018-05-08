@@ -20,10 +20,8 @@ public class DataInput {
                     + "Twój wpis: ");
 
             input = scanner.nextLine();
-
             InputValidator inputValidator = new InputValidator(input);
             validator = inputValidator.validateInput();
-            System.out.println(validator);
         }
 
         return input;
