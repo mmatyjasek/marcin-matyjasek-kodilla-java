@@ -1,7 +1,6 @@
 package com.kodilla.hibernate.tasklist.dao;
 
 
-import com.kodilla.hibernate.exception.NotFoundEntityException;
 import com.kodilla.hibernate.tasklist.TaskList;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,7 +27,7 @@ public class TaskListDaoTestSuite {
 
         //Then
         String listName = taskList.getListName();
-        TaskList readTaskList = taskListDao.findByListName(listName).get(0);
+        TaskList readTaskList = taskListDao.findByListName(listName);
         Assert.assertEquals(listName, readTaskList.getListName());
 
         //CleanUp
