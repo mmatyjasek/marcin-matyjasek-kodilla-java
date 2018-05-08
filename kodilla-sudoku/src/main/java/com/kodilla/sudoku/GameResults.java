@@ -6,15 +6,20 @@ public class GameResults {
 
     public void showSudokuResults (BoardStack boardStack) {
         Deque<SudokuBoard> result = boardStack.getBoardStack();
-        System.out.println("There are " + result.size() + " possible solutions of your Sudoku!");
-        int maxResults = 5;
-        if(result.size() < 5){
-            maxResults = result.size();
+
+
+        if(result.size() ==1001){
+            System.out.println("Liczba możliwych rozwiązań Twojego Sudoku jest większa niż 1000.");
+        } else {
+            System.out.println("Liczba możliwych rozwiązań Twojego Sudoku: " + result.size());
         }
-        System.out.println("Showing " + maxResults + " possible solutions:");
-        for(int i =0; i<maxResults; i++) {
-            System.out.println(i+1 + ")\n" + result.pop() + "\n");
+
+        if(result.size() > 1){
+            System.out.println("Jedno z możliwych rozwiązań:\n" + result.pop() + "\n");
+        } else {
+            System.out.println("Rozwiązanie:\n" + result.pop() + "\n");
         }
+
     }
 
 }

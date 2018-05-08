@@ -23,7 +23,7 @@ public class DataInput {
             InputValidator inputValidator = new InputValidator(input);
             validator = inputValidator.validateInput();
         }
-
+        scanner.reset();
         return input;
     }
 }

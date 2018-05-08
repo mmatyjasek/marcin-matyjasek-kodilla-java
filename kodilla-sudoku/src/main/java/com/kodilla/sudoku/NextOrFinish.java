@@ -11,9 +11,11 @@ public class NextOrFinish {
                 + "Jeśli chcesz zakończyć grę wpisz 'fin' i wciśnij ENTER.\n");
         String decision = scanner.nextLine();
         if(decision.equals("fin")){
+            scanner.reset();
             return true;
 
         } else {
+            scanner.reset();
             return false;
         }
 

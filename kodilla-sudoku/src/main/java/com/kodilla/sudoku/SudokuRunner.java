@@ -2,9 +2,6 @@ package com.kodilla.sudoku;
 
 public class SudokuRunner {
     private static SudokuSolver sudokuSolver = new SudokuSolver();
-    //private static BoardStack solvedBoardStack = new BoardStack();
-    //private static BoardStack tempBoardStack = new BoardStack();
-    //private static BoardStack backtrack = new BoardStack();
     private static FirstEmpty firstEmpty = new FirstEmpty();
 
     public BoardStack run(SudokuBoard board) {
@@ -32,6 +29,9 @@ public class SudokuRunner {
                             sudokuSolver.solve(board);
                             if (sudokuSolver.solve(board).getCount() == 81) {
                                 solvedBoardStack.addBoard(board);
+                                if(solvedBoardStack.getBoardStack().size() > 1000){
+                                    return solvedBoardStack;
+                                }
                             } else {
                                 tempBoardStack.addBoard(board);
                             }
