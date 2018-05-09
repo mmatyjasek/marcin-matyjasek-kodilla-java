@@ -7,7 +7,6 @@ public class GameResults {
     public void showSudokuResults (BoardStack boardStack) {
         Deque<SudokuBoard> result = boardStack.getBoardStack();
 
-
         if(result.size() ==1001){
             System.out.println("Liczba możliwych rozwiązań Twojego Sudoku jest większa niż 1000.");
         } else {
@@ -19,7 +18,5 @@ public class GameResults {
         } else {
             System.out.println("Rozwiązanie:\n" + result.pop() + "\n");
         }
-
     }
-
 }

@@ -45,7 +45,6 @@ public class InsertedNumbersFinder {
         int minColumn = blockIndex.findBlockMinIndex(col);
         int maxColumn = blockIndex.findBlockMaxIndex(col);
 
-
         for(int n = minRow; n < maxRow; n++) {
             for (int m = minColumn; m < maxColumn; m++) {
                 if ((board.getBoard().get(n).getElement(m).getNumber() != EMPTY) && (!numbersInABlock.contains(board.getBoard().get(n).getElement(m).getNumber()))) {

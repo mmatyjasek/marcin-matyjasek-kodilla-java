@@ -31,7 +31,6 @@ public class InputValidator {
         return true;
     }
 
-
     public boolean validateDistinctNumbersInARow(){
         List<String> numbersInRow = new ArrayList<>();
         for(int i=0; i < input.length(); i+=3) {
@@ -57,6 +56,7 @@ public class InputValidator {
         }
         return true;
     }
+
     public boolean validateDistinctNumbersInABlock(){
         List<Integer> block1 = new ArrayList<>();
         List<Integer> block2 = new ArrayList<>();
@@ -103,12 +103,9 @@ public class InputValidator {
         return true;
     }
 
-
     public boolean validateInput() {
         return validateIfDivisibleByThree() && validateIfCorrectRange()
                 && validateDistinctNumbersInARow() && validateDistinctNumbersInAColumn() && validateDistinctNumbersInABlock();
     }
-
-
 
 }

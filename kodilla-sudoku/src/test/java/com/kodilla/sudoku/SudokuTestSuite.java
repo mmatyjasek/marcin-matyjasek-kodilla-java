@@ -10,6 +10,7 @@ import java.util.List;
 public class SudokuTestSuite {
     public final static int MAX_INDEX = 9;
     public final static int MIN_INDEX = 0;
+    public final static int EMPTY = -1;
 
 
     @Test
@@ -60,6 +61,159 @@ public class SudokuTestSuite {
                 Assert.assertEquals(numbers2, clonedNumbers2);
             }
         }
+    }
+
+    @Test
+    public void testSudokuBoardBuilder() {
+        SudokuBoardBuilder sudokuBoardBuilder = new SudokuBoardBuilder();
+        SudokuBoard board = sudokuBoardBuilder.build("111122133144155166177188199");
+        int count = 0;
+        for (int row = MIN_INDEX; row < MAX_INDEX; row++) {
+            for (int col = MIN_INDEX; col < MAX_INDEX; col++) {
+                if (board.getBoard().get(row).getElement(col).getNumber() != EMPTY) {
+                    count++;
+                }
+            }
+        }
+        int number = board.getBoard().get(0).getElement(0).getNumber();
+
+        Assert.assertEquals(9, count);
+        Assert.assertEquals(1, number);
+    }
+
+    @Test
+    public void testValidateIfDivisibleByThree() {
+        String input1 = "112923";
+        String input2 = "11292";
+        InputValidator inputValidator1 = new InputValidator(input1);
+        InputValidator inputValidator2 = new InputValidator(input2);
+
+        Assert.assertTrue(inputValidator1.validateIfDivisibleByThree());
+        Assert.assertFalse(inputValidator2.validateIfDivisibleByThree());
+    }
+
+    @Test
+    public void testValidateIfCorrectRange(){
+        String input1 = "112923";
+        String input2 = "110292";
+        InputValidator inputValidator1 = new InputValidator(input1);
+        InputValidator inputValidator2 = new InputValidator(input2);
+
+        Assert.assertTrue(inputValidator1.validateIfCorrectRange());
+        Assert.assertFalse(inputValidator2.validateIfCorrectRange());
+    }
+
+    @Test
+    public void testValidateDistinctNumbersInARow() {
+        String input1 = "112923";
+        String input2 = "112119";
+        InputValidator inputValidator1 = new InputValidator(input1);
+        InputValidator inputValidator2 = new InputValidator(input2);
+
+        Assert.assertTrue(inputValidator1.validateDistinctNumbersInARow());
+        Assert.assertFalse(inputValidator2.validateDistinctNumbersInARow());
+    }
+
+    @Test
+    public void testValidateDistinctNumbersInAColumn() {
+        String input1 = "112923";
+        String input2 = "112192";
+        InputValidator inputValidator1 = new InputValidator(input1);
+        InputValidator inputValidator2 = new InputValidator(input2);
+
+        Assert.assertTrue(inputValidator1.validateDistinctNumbersInAColumn());
+        Assert.assertFalse(inputValidator2.validateDistinctNumbersInAColumn());
+    }
+
+    @Test
+    public void testValidateDistinctNumbersInABlock() {
+        String input1 = "112923";
+        String input2 = "112133";
+        InputValidator inputValidator1 = new InputValidator(input1);
+        InputValidator inputValidator2 = new InputValidator(input2);
+
+        Assert.assertTrue(inputValidator1.validateDistinctNumbersInABlock());
+        Assert.assertFalse(inputValidator2.validateDistinctNumbersInABlock());
+    }
+
+    @Test
+    public void testValidateInput() {
+        String input1 = "112923";
+        String input2 = "1121341191252";
+        InputValidator inputValidator1 = new InputValidator(input1);
+        InputValidator inputValidator2 = new InputValidator(input2);
+
+        Assert.assertTrue(inputValidator1.validateInput());
+        Assert.assertFalse(inputValidator2.validateInput());
+    }
+
+    @Test
+    public void testFindBlockMinIndex() {
+        BlockIndex blockIndex = new BlockIndex();
+
+        int min1 = blockIndex.findBlockMinIndex(1);
+        int min2 = blockIndex.findBlockMinIndex(4);
+        int min3 = blockIndex.findBlockMinIndex(7);
+
+        Assert.assertEquals(0, min1);
+        Assert.assertEquals(3, min2);
+        Assert.assertEquals(6, min3);
+    }
+
+    @Test
+    public void testFindBlockMaxIndex() {
+        BlockIndex blockIndex = new BlockIndex();
+
+        int max1 = blockIndex.findBlockMaxIndex(1);
+        int max2 = blockIndex.findBlockMaxIndex(4);
+        int max3 = blockIndex.findBlockMaxIndex(7);
+
+        Assert.assertEquals(3, max1);
+        Assert.assertEquals(6, max2);
+        Assert.assertEquals(9, max3);
+    }
+
+    @Test
+    public void testAddBoard() {
+        BoardStack boardStack = new BoardStack();
+        SudokuBoard sudokuBoard = new SudokuBoard();
+
+        boardStack.addBoard(sudokuBoard);
+
+        Assert.assertEquals(1, boardStack.getBoardStack().size());
+    }
+
+    @Test
+    public void testFindFirstEmpty() {
+        FirstEmpty firstEmpty = new FirstEmpty();
+        SudokuBoardBuilder sudokuBoardBuilder = new SudokuBoardBuilder();
+        SudokuBoard sudokuBoard = sudokuBoardBuilder.build("111");
+
+        int row = firstEmpty.findRow(sudokuBoard);
+        int column = firstEmpty.findColumn(sudokuBoard);
+
+        Assert.assertEquals(0, row);
+        Assert.assertEquals(1, column);
+
+    }
+
+
+    @Test
+    public void testFindInsertedNumbersInRowColumnBlock() {
+
+        SudokuBoardBuilder sudokuBoardBuilder = new SudokuBoardBuilder();
+        SudokuBoard sudokuBoard = sudokuBoardBuilder.build("521614715917422731151361281");
+        InsertedNumbersFinder insertedNumbersFinder = new InsertedNumbersFinder(sudokuBoard);
+
+        List<Integer> numbersInRow = insertedNumbersFinder.findInARow(0);
+        List<Integer> numbersInColumn = insertedNumbersFinder.findInAColumn(0);
+        List<Integer> numbersInBlock = insertedNumbersFinder.findInABlock(0,0);
+        List<Integer> numbersInRowColumnBlock = insertedNumbersFinder.findNumbers(0,0);
+
+        Assert.assertEquals(3, numbersInRow.size());
+        Assert.assertEquals(5, numbersInColumn.size());
+        Assert.assertEquals(3, numbersInBlock.size());
+        Assert.assertEquals(8, numbersInRowColumnBlock.size());
     }
 
     @Test

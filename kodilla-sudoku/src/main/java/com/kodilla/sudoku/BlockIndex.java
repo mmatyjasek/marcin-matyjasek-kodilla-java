@@ -7,7 +7,6 @@ public class BlockIndex {
     private final static int SECOND = 6;
     private final static int LAST = 9;
 
-
     private int find(int i, int first, int second, int last) {
         if (i < FIRST) {
             return first;
