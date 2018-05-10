@@ -217,29 +217,67 @@ public class SudokuTestSuite {
     }
 
     @Test
-    public void testSudokuBoard() {
+    public void testSudokuSolver() {
         SudokuBoardBuilder sudokuBoardBuilder = new SudokuBoardBuilder();
-        //ekspert
-        //SudokuBoard board = sudokuBoardBuilder.build("219621422725831537939944645952856759367273579181583486787694195");
-        SudokuBoard board = sudokuBoardBuilder.build("111122133144155166177188199");
+        SudokuBoard sudokuBoard = sudokuBoardBuilder.build("414517619427328632534138343545948451753857961865766267772173576686592196499");
+        SudokuSolver sudokuSolver = new SudokuSolver();
+        SudokuDto sudokuDto = sudokuSolver.solve(sudokuBoard);
 
-        //trudne
-        //SudokuBoard sudokuBoard = sudokuBoardBuilder.build("511812613715924126627634743951253155357559563965972475879383584688295497798");
-        System.out.println("Input:\n" + board + "\n");
-        /*SudokuSolver sudokuSolver = new SudokuSolver();
-        System.out.println(sudokuSolver.solve(board));*/
+        SudokuBoard solvedSudokuBoard = sudokuDto.getBoard();
+        int count = sudokuDto.getCount();
+        boolean isSolution = sudokuDto.isSolution();
 
 
-        /*SudokuRunner sudokuRunner = new SudokuRunner();
-        Deque<SudokuBoard> result = sudokuRunner.run(board).getBoardStack();
-        System.out.println("There are " + result.size() + " possible solutions of your Sudoku!");
-        int maxResults = 5;
-        if(result.size() < 5){
-            maxResults = result.size();
-        }
-        System.out.println("Showing " + maxResults + " possible solutions:");
-        for(int i =0; i<maxResults; i++) {
-            System.out.println(i+1 + ")\n" + result.pop() + "\n");
-        }*/
+        SudokuBoard completeSudokuBoard = sudokuBoardBuilder.build("111312213414715916517818619521922823124625226427328729731632433534335836937138239641842343244545446747948149451252753" +
+                "954155356857658559961162563664865766267468369871772173374475576677278979381482983784285686187588889291592693894995196397798499");
+
+        compareNumbersInBoards(solvedSudokuBoard, completeSudokuBoard);
+
+        Assert.assertEquals(81, count);
+        Assert.assertTrue(isSolution);
     }
+
+    @Test
+    public void testSudokuRunnerWhenMoreThan1000Solutions() {
+        SudokuBoardBuilder sudokuBoardBuilder = new SudokuBoardBuilder();
+        SudokuBoard sudokuBoard = sudokuBoardBuilder.build("211512316918119321923727228133636337645846349152455661363568171372273778");
+        SudokuRunner sudokuRunner = new SudokuRunner();
+        BoardStack boardStack = sudokuRunner.run(sudokuBoard);
+
+        SudokuBoard solvedSudokuBoard = boardStack.getBoardStack().pop();
+        System.out.println(solvedSudokuBoard);
+
+        SudokuBoard completeSudokuBoard = sudokuBoardBuilder.build("21151281341471531661791811932162292382412552672722842943173213323493563633783853994124274354464584644714834985115255335445595625" +
+                "7658759661462363164265766967568869171372273974575476877778679581882683784385286187488989791992493694895196597398299");
+
+        compareNumbersInBoards(solvedSudokuBoard, completeSudokuBoard);
+        Assert.assertEquals(1000, boardStack.getBoardStack().size());
+    }
+
+    @Test
+    public void testSudokuRunnerWhenLessThan1000Solutions() {
+        SudokuBoardBuilder sudokuBoardBuilder = new SudokuBoardBuilder();
+        SudokuBoard sudokuBoard = sudokuBoardBuilder.build("213414817722225438643955758459466168969871574377681884787589392193694");
+        SudokuRunner sudokuRunner = new SudokuRunner();
+        BoardStack boardStack = sudokuRunner.run(sudokuBoard);
+
+        SudokuBoard solvedSudokuBoard = boardStack.getBoardStack().peek();
+        SudokuBoard completeSudokuBoard = sudokuBoardBuilder.build("911612213414115516817318719321722423924225826127528629131832533734635336937438239441942643144545746247848349251152853354" +
+                "955656557758459761562363264865466667168969871272773574475976377678179681482983884385186787288589591392193694795296497998899");
+
+        compareNumbersInBoards(solvedSudokuBoard, completeSudokuBoard);
+        Assert.assertEquals(1, boardStack.getBoardStack().size());
+    }
+
+
+    private void compareNumbersInBoards(SudokuBoard solvedSudokuBoard, SudokuBoard completeSudokuBoard) {
+        for (int n = MIN_INDEX; n < MAX_INDEX; n++) {
+            for (int m = MIN_INDEX; m < MAX_INDEX; m++) {
+                int actualNumber = solvedSudokuBoard.getBoard().get(n).getElement(m).getNumber();
+                int expectedNumber = completeSudokuBoard.getBoard().get(n).getElement(m).getNumber();
+                Assert.assertEquals(expectedNumber, actualNumber);
+            }
+        }
+    }
+
 }
