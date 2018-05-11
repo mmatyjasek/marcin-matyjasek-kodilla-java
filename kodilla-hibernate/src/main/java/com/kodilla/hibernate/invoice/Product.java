@@ -52,4 +52,8 @@ public class Product {
     private void setName(String name) {
         this.name = name;
     }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
 }

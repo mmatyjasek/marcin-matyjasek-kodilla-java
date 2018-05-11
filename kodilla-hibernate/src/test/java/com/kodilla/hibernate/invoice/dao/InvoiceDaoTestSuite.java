@@ -18,12 +18,19 @@ public class InvoiceDaoTestSuite {
     @Autowired
     InvoiceDao invoiceDao;
 
+    @Autowired
+    ProductDao productDao;
+
     @Test
     public void testSaveInvoice() {
         //Given
         Product product1 = new Product("Product 1");
         Product product2 = new Product("Product 2");
         Product product3 = new Product("Product 3");
+        productDao.save(product1);
+        productDao.save(product2);
+        productDao.save(product3);
+
         Item item1 = new Item(new BigDecimal(100), 3);
         Item item2 = new Item(new BigDecimal(250), 2);
         Item item3 = new Item(new BigDecimal(10), 7);
