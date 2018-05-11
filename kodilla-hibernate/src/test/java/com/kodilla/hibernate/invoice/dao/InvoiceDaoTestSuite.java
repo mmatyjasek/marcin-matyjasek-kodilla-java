@@ -16,7 +16,10 @@ import java.math.BigDecimal;
 @SpringBootTest
 public class InvoiceDaoTestSuite {
     @Autowired
-    InvoiceDao invoiceDao;
+    private InvoiceDao invoiceDao;
+
+    @Autowired
+    private ProductDao productDao;
 
     @Test
     public void testSaveInvoice() {
@@ -24,6 +27,9 @@ public class InvoiceDaoTestSuite {
         Product product1 = new Product("Product 1");
         Product product2 = new Product("Product 2");
         Product product3 = new Product("Product 3");
+        productDao.save(product1);
+        productDao.save(product2);
+        productDao.save(product3);
         Item item1 = new Item(new BigDecimal(100), 3);
         Item item2 = new Item(new BigDecimal(250), 2);
         Item item3 = new Item(new BigDecimal(10), 7);
@@ -57,14 +63,26 @@ public class InvoiceDaoTestSuite {
 
         int id1 = invoice1.getId();
         int id2 = invoice2.getId();
+        int pr_id1 = product1.getId();
+        int pr_id2 = product2.getId();
+        int pr_id3 = product3.getId();
+
 
         //Then
         Assert.assertNotEquals(0, id1);
         Assert.assertNotEquals(0, id2);
 
         //CleanUp
-        //invoiceDao.deleteById(id1);
-        //invoiceDao.deleteById(id2);
+        try{
+            invoiceDao.deleteById(id1);
+            invoiceDao.deleteById(id2);
+            productDao.deleteById(pr_id1);
+            productDao.deleteById(pr_id2);
+            productDao.deleteById(pr_id3);
+        }catch (Exception e) {
+            //do nothing
+        }
+
     }
 
 }
