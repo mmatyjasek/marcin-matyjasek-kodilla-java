@@ -4,11 +4,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+@NamedQueries({
+        @NamedQuery(
+                name = "Employee.retrieveEmployeeByLastName",
+                query = "FROM Employee WHERE lastname = :LASTNAME"
+        ),
+        @NamedQuery(
+                name = "Employee.retrieveEmployeeByLastNameIncluding",
+                query = "FROM Employee WHERE lastname LIKE :EXC"
+        )
+})
 
-@NamedQuery(
-        name = "Employee.retrieveEmployeeByLastName",
-        query = "FROM Employee WHERE lastname = :LASTNAME"
-)
 @Entity
 @Table(name = "EMPLOYEES")
 public class Employee {
@@ -23,6 +29,13 @@ public class Employee {
     public Employee(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
+    }
+
+    public Employee(int id, String firstname, String lastname, List<Company> companies) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.companies = companies;
     }
 
     @Id
@@ -53,6 +66,8 @@ public class Employee {
     public List<Company> getCompanies() {
         return companies;
     }
+
+
 
     private void setId(int id) {
         this.id = id;
