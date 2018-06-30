@@ -4,11 +4,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+@NamedQueries({
+        @NamedQuery(
+                name = "Company.retrieveCompaniesWithNameStartingWith",
+                query = "FROM Company WHERE name LIKE :SUB"
+        ),
+        @NamedQuery(
+                name = "Company.retrieveCompaniesWithNameIncluding",
+                query = "FROM Company WHERE name LIKE :EXC"
+        )
+})
 
-@NamedQuery(
-        name = "Company.retrieveCompaniesWithNameStartingWith",
-        query = "FROM Company WHERE name LIKE :SUB"
-)
 @Entity
 @Table(name = "COMPANIES")
 public class Company {
@@ -21,6 +27,12 @@ public class Company {
 
     public Company(String name) {
         this.name = name;
+    }
+
+    public Company(int id, String name, List<Employee> employees) {
+        this.id = id;
+        this.name = name;
+        this.employees = employees;
     }
 
     @Id
