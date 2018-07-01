@@ -78,8 +78,5 @@ public class ShopServiceTest {
         } catch (OrderProcessingException e) {
             //business exception - should be handled in real application
         }
-
-
-
     }
 }
