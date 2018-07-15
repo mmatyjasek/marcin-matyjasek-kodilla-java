@@ -56,8 +56,6 @@ public class CrudAppTestSuite {
 
     private void sendTestTaskToTrello(String taskName) throws InterruptedException {
         final String XPATH_SELECT = "//select[1]";
-        //final String XPATH_DATATABLE_ROW = "//form[@class=\"datatable__row\"]";
-        //final String XPATH_DATATABLE_FIELD = ".//p[@class=\"datatable__field-value\"]";
         final String XPATH_CARD_CREATION = ".//button[contains(@class, \"card-creation\")]";
         driver.navigate().refresh();
         while(!driver.findElement(By.xpath(XPATH_SELECT)).isDisplayed());
@@ -120,7 +118,6 @@ public class CrudAppTestSuite {
     }
 
     private void cleanUp(String taskName) throws InterruptedException {
-
         final String XPATH_BUTTON_DELETE = ".//button";
         final String BUTTON_NAME = "Delete";
 
@@ -139,7 +136,6 @@ public class CrudAppTestSuite {
                             .filter(b -> b.getText().contains(BUTTON_NAME)).findFirst().orElseThrow(() ->
                                     new NotFoundException("ERROR: Cannot find button: " + BUTTON_NAME))
                             .click();
-
                 });
         Thread.sleep(SLEEP);
     }
