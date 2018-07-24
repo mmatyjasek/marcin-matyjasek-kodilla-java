@@ -83,7 +83,7 @@ public class CrudAppTestSuite {
         final String ID_LOGIN = "login";
         final String XPATH_BOARDS = "//a[contains(@href, \"/boards\")]/span/span";
         final String XPATH_BOARD_TILE = "//a[contains(@class, \"board-tile\")]";
-        final String BOARD_NAME = "Kodilla Testing";
+        final String BOARD_NAME = "Kodilla";
         final int ZERO = 0;
         final String XPATH_CARDS = "//span[contains(@class, \"js-card-name\")]";
         boolean result;
